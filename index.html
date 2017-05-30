@@ -28,6 +28,10 @@
       padding:20px 15px;
       background-color:#fff;
     }
+    #disqus_thread {
+      margin-top:100px;
+      margin-bottom:100px;
+    }
     </style>
   </head>
 
@@ -54,6 +58,27 @@
     </nav>
 
     <div id="contents" class="container" role="main"></div>
+
+    <!--<a href="#disqus_thread">Link</a>-->
+    <div class="container" id="disqus_thread"></div>
+    <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hitthebuk.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
     <footer>
       <hr class="featurette-divider">
@@ -100,5 +125,6 @@
         .error(function(data, status, headers, config) { console.log(data, status, headers, config); });
       };
     </script>
+    <script id="dsq-count-scr" src="//hitthebuk.disqus.com/count.js" async></script>
   </body>
 </html>
