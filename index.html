@@ -1,13 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" ng-app ng-controller="httpTest">
+<html lang="ko" ng-controller="CommonController">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WR74PM6');</script>
-    <!-- End Google Tag Manager -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,24 +8,48 @@
     <meta name="keywords" content="HTML, CSS, JS, JavaScript, node, angularjs, framework, bootstrap, web development">
     <meta name="author" content="hitthebuk(unick)">
     <title>Web Developer Guide Document</title>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WR74PM6');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafrex/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string
+      // and converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search) {
+          var q = {};
+          l.search.slice(1).split('&').forEach(function(v) {
+            var a = v.split('=');
+            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+          });
+          if (q.p !== undefined) {
+            window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + (q.p || '') +
+              (q.q ? ('?' + q.q) : '') +
+              l.hash
+            );
+          }
+        }
+      }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <style>
-    body {
-      padding-top: 70px;
-    }
-    footer hr {
-      margin-bottom:0;
-    }
-    footer div {
-      padding:20px 15px;
-      background-color:#fff;
-    }
-    #disqus_thread {
-      margin-top:100px;
-      margin-bottom:100px;
-    }
-    </style>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link ng-repeat="stylesheet in stylesheets" ng-href="{{stylesheet}}" type="text/css" rel="stylesheet" />
   </head>
 
   <body role="document">
@@ -49,36 +66,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a href="{{logo.link}}" class="navbar-brand">{{logo.title}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav"></ul>
-          <ul class="nav navbar-nav navbar-right"></ul>
+          <ul class="nav navbar-nav">
+            <li ng-repeat="default in defaults"><a href="{{default.link}}" target="{{default.target?default.target:'_self'}}">{{default.menu}}</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-repeat="right in rights"><a href="{{right.link}}" target="{{right.target?right.target:'_self'}}">{{right.menu}}</a></li>
+          </ul>
         </div>
       </div>
     </nav>
 
-    <div id="contents" class="container" role="main"></div>
-
-    <!--<a href="#disqus_thread">Link</a>-->
-    <div class="container" id="disqus_thread"></div>
-    <script>
-      /**
-      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-      /*
-      var disqus_config = function () {
-      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      };
-      */
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://hitthebuk.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <ng-view></ng-view>
 
     <footer>
       <hr class="featurette-divider">
@@ -88,43 +89,9 @@
       </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
-
-    <script src="/js/bootstrap/docs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js" data-main="/js/main"></script>
     <script src="/js/bootstrap/ie10-viewport-bug-workaround.js"></script>
-    <script>
-      var httpTest = function($scope, $http) {
-        $http({
-        	method: 'GET',
-        	url: 'https://s3.ap-northeast-2.amazonaws.com/hitthebuk.github.io/menu.json',
-        	headers: {'Content-Type': 'application/json; charset=utf-8'}
-        })
-        .success(function(data, status, headers, config) {
-        	if(data) {
-            $("#navHeader").append("<a href=\""+data.logo.link+"\" class=\"navbar-brand\">"+data.logo.title+"</a>");
-            $("#navbar ul").html("");
-            $.each(data.default, function(i, d) { $("#navbar ul:eq(0)").append("<li><a href=\""+d.link+"\""+(d.target?" target=\""+d.target+"\"":"")+">"+d.menu+"</a></li>"); });
-            //$("#navbar ul:eq(0) li:eq(0)").addClass("active"); // 현재 선택된 메뉴를 표시하는 로직 추가 필요
-            $.each(data.right, function(i, d) { $("#navbar ul:eq(1)").append("<li><a href=\""+d.link+"\""+(d.target?" target=\""+d.target+"\"":"")+">"+d.menu+"</a></li>"); });
-        	} else { console.log("에러"); }
-        })
-        .error(function(data, status, headers, config) { console.log(data, status, headers, config); });
-        $http({
-        	method: 'GET',
-        	url: 'https://s3.ap-northeast-2.amazonaws.com/hitthebuk.github.io/start.json',
-        	headers: {'Content-Type': 'application/json; charset=utf-8'}
-        })
-        .success(function(data, status, headers, config) {
-        	if(data) {
-            if(data.message && data.message.title && data.message.desc) $("#contents").append("<div class=\"jumbotron\"><h1>"+data.message.title+"</h1><p>"+data.message.desc+"</p></div>");
-            if(data.contents) $.each(data.contents, function(i, d) { $("#contents").append("<div class=\"page-header\"><h1>"+d.title+"</h1></div>"+d.content.replace(/&quot;/g,"\"")); });
-        	} else { console.log("에러"); }
-        })
-        .error(function(data, status, headers, config) { console.log(data, status, headers, config); });
-      };
-    </script>
-    <script id="dsq-count-scr" src="//hitthebuk.disqus.com/count.js" async></script>
   </body>
 </html>
